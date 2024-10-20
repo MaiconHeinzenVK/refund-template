@@ -49,9 +49,20 @@ function expenseAdd(newExpense) {
     expenseIcon.setAttribute("src", `img/${newExpense.category_id}.svg`)
     expenseIcon.setAttribute("alt", newExpense.category_name)
 
-    expenseItem.append(expenseIcon)
+    expenseInfo = document.createElement("div")
+    expenseInfo.classList.add("expense-info")
+
+    const expenseName = document.createElement("strong")
+    expenseName.textContent = newExpense.expense
+
+    const expenseCategory = document.createElement("span")
+    expenseCategory.textContent = newExpense.category_name
+
+    expenseInfo.append(expenseName, expenseCategory)
+
+    expenseItem.append(expenseIcon, expenseInfo)
     expenseList.append(expenseItem)
-    
+
   } catch (error) {
     alert("Não foi possivel atualizar a lista de despensas")
     console.log(error)
