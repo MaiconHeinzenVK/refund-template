@@ -4,6 +4,8 @@ const amount = document.getElementById("amount")
 const expense = document.getElementById("expense")
 const category = document.getElementById("category")
 
+const expenseList = document.querySelector("ul")
+
 
 amount.oninput = () => {
   let value = amount.value.replace(/\D/g, "")
@@ -34,5 +36,24 @@ form.onsubmit = (event) => {
     created_at: new Date(),
   }
 
-  console.log(newExpense)
+  expenseAdd(newExpense)
+}
+
+function expenseAdd(newExpense) {
+  try{
+    //Cria o elemento para adicionar na lista
+    const expenseItem = document.createElement("li")
+    expenseItem.classList.add("expense")
+
+    const expenseIcon = document.createElement("img")
+    expenseIcon.setAttribute("src", `img/${newExpense.category_id}.svg`)
+    expenseIcon.setAttribute("alt", newExpense.category_name)
+
+    expenseItem.append(expenseIcon)
+    expenseList.append(expenseItem)
+    
+  } catch (error) {
+    alert("Não foi possivel atualizar a lista de despensas")
+    console.log(error)
+  }
 }
