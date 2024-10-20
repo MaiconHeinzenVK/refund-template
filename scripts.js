@@ -94,7 +94,7 @@ function updateTotals() {
     for (let item = 0; item < items.length; item++) {
       const itemAmout = items[item].querySelector(".expense-amount")
 
-      let value = itemAmout.textContent.replace(/[^\d]/g, "").replace(",",".")
+      let value = itemAmout.textContent.replace(/[^\d,]/g, "").replace(",",".")
     
       value = parseFloat(value)
 
@@ -104,10 +104,25 @@ function updateTotals() {
       
       total += Number(value)
     }
+    const symbolBRL = document.createElement("small")
+    symbolBRL.textContent = "R$"
+
+    total = formatCurrencyBrl(total).toUpperCase().replace("R$", "")
+    expensesTotal.innerHTML = ""
+
+    expensesTotal.append(symbolBRL, total)
     
-    expensesTotal.textContent = total
   } catch (error) {
     console.log(error)
     alert("Não foi possivel atualizar os totais")
   }
 }
+
+expenseList.addEventListener("click", function(event) {
+  if(event.target.classList.contains("remove-icon")) {
+    const item = event.target.closest(".expense")
+    item.remove()
+  }
+
+  updateTotals()
+})
