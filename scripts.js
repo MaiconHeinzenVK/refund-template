@@ -58,11 +58,20 @@ function expenseAdd(newExpense) {
     const expenseCategory = document.createElement("span")
     expenseCategory.textContent = newExpense.category_name
 
-    expenseInfo.append(expenseName, expenseCategory)
+    expenseInfo.append(expenseName, expenseCategory, )
+    const expenseAmount = document.createElement("span")
+    expenseAmount.classList.add("expense-amount")
+    
+    expenseAmount.innerHTML = `<small>R$</small>${newExpense.amount
+      .toUpperCase()
+      .replace("R$", "")}`
 
-    expenseItem.append(expenseIcon, expenseInfo)
+    
+
+    expenseItem.append(expenseIcon, expenseInfo, expenseAmount)
     expenseList.append(expenseItem)
 
+    
   } catch (error) {
     alert("Não foi possivel atualizar a lista de despensas")
     console.log(error)
