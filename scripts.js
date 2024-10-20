@@ -75,12 +75,14 @@ function expenseAdd(newExpense) {
     
     expenseItem.append(expenseIcon, expenseInfo, expenseAmount, removeIcon)
     expenseList.append(expenseItem)
-
+    
+    formClear()
     updateTotals()
   } catch (error) {
     alert("Não foi possivel atualizar a lista de despensas")
     console.log(error)
   }
+
 }
 
 function updateTotals() {
@@ -126,3 +128,11 @@ expenseList.addEventListener("click", function(event) {
 
   updateTotals()
 })
+
+function formClear(){
+  expense.value = ""
+  category.value = ""
+  amount.value = ""
+
+  expense.focus()
+} 
